@@ -1,0 +1,54 @@
+1)SELECT * FROM netflix.netflix;
+2)SELECT
+    'Runtime' AS Runtime,
+    MIN(Runtime) AS Min,
+    MAX(Runtime) AS Max,
+    AVG(Runtime) AS Mean,
+    COUNT(Runtime) AS Count,
+    STDDEV(Runtime) AS Std_Deviation
+FROM netflix.netflix
+UNION ALL
+SELECT
+    "IMDB SCORE" AS IMDB_Score,
+    MIN("IMDB Score") AS Min,
+    MAX("IMDB Score") AS Max,
+    AVG("IMDB Score") AS Mean,
+    COUNT("IMDB Score") AS Count,
+    STDDEV("IMDB Score") AS Std_Deviation
+FROM netflix.netflix;
+
+4)SELECT COUNT(*) - COUNT(Title) AS Title,
+ COUNT(*) - COUNT(Genre) AS Genre,
+ COUNT(*) - COUNT(Premiere) AS Premiere,
+ COUNT(*) - COUNT(Runtime) AS Runtime,
+ COUNT(*) - COUNT("IMDB Score") AS IMDB_Score,
+ COUNT(*) - COUNT(Language) AS Language
+FROM netflix.netflix;
+5)select Title,count(*) as count 
+from netflix.netflix
+group by Title 
+order by count DESC
+6)select Genre,count(*) as count
+from netflix.netflix
+group by Genre 
+order by count DESC
+7)select Premiere,count(*) as count
+from netflix.netflix
+group by Premiere 
+order by count DESC
+8)SELECT Title,Genre,Premiere,Runtime,"IMDB Score",Language,
+    REPLACE(Premiere, '.', ',') AS ModifiedPremiere,
+    STR_TO_DATE(REPLACE(Premiere, '.', ','), '%M %d, %Y') AS PremiereDate,
+    SUBSTRING_INDEX(REPLACE(Premiere, ',', ''), ' ', -1) AS Year
+FROM netflixanalysis.netflixoriginalsdata;
+
+10)select Language,count(*) as count
+from netflix.netflix
+group by Language
+order by count DESC
+
+11)select Genre,count(*) as count
+from netflix.netflix
+group by Genre
+order by count DESC
+LIMIT 5
